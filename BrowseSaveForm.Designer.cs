@@ -29,6 +29,7 @@ namespace SaveManagerEldenRing
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveManager));
             this.savePathEditBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
@@ -93,8 +94,9 @@ namespace SaveManagerEldenRing
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.savePathEditBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BrowseSaveForm";
-            this.Text = "BrowseSaveForm";
+            this.Text = "Browse Save Location";
             this.ResumeLayout(false);
             this.PerformLayout();
 

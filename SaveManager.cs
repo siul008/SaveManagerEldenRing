@@ -17,9 +17,9 @@ namespace SaveManagerEldenRing
         public string saveLocationPath;
         BindingList<SaveFile> list;
         string folderPath;
-        readonly string dataPath = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\";
-        readonly string dataPathTxt = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\json.txt";
-        readonly string saveLocationPathTxt = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\saveLocation.txt";
+        readonly string dataPath = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\";
+        readonly string dataPathTxt = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\json.txt";
+        readonly string saveLocationPathTxt = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\saveLocation.txt";
 
         public SaveManager()
         {
