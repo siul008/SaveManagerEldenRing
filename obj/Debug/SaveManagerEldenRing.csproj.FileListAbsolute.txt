@@ -10,3 +10,11 @@ C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRin
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.SaveManager.resources
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.BrowseSaveForm.resources
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.CreateSave.resources
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.csproj.CopyComplete
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRing.exe.manifest
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRing.application
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.TrustInfo.xml
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.exe.manifest
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.application

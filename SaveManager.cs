@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,9 @@ namespace SaveManagerEldenRing
         public string saveLocationPath;
         BindingList<SaveFile> list;
         string folderPath;
-        DateTime Date;
+        readonly string dataPath = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\";
+        readonly string dataPathTxt = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\json.txt";
+        readonly string saveLocationPathTxt = @"C:\Users\Siul008\Documents\EldenRingBackup\ListData\saveLocation.txt";
 
         public SaveManager()
         {
@@ -24,19 +27,43 @@ namespace SaveManagerEldenRing
             folderPath = @"C:\Users\"+Environment.UserName+ @"\Documents\EldenRingBackup\";
         }
         private void SaveManager_Load(object sender, EventArgs e)
-        {
+        {           
             if(!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
+            if (!Directory.Exists(dataPath))
+            {
+                Directory.CreateDirectory(dataPath);
+            }
+            if (!File.Exists(dataPathTxt))
+            {
+                StreamWriter sw = File.CreateText(dataPathTxt);
+                sw.Close();
+            }
+            if (!File.Exists(saveLocationPathTxt))
+            {
+                StreamWriter sw = File.CreateText(saveLocationPathTxt);
+                sw.Close();
+            }
+            else
+            {
+                saveLocationPath = File.ReadAllText(saveLocationPathTxt);
+            }
             list = new BindingList<SaveFile>();
+            if(JsonConvert.DeserializeObject(File.ReadAllText(dataPathTxt)) != null)
+            {
+                list = JsonConvert.DeserializeObject<BindingList<SaveFile>>(File.ReadAllText(dataPathTxt));
+            }
+            UpdateUi();
             GetSaveList();
         }
         public void UpdateUi()
         {
             if(!String.IsNullOrWhiteSpace(saveLocationPath))
             {
-                createSaveButton.Enabled = true;
+                createSaveButton.Enabled = true;               
+                File.WriteAllText(saveLocationPathTxt, saveLocationPath);
             }
         }
 
@@ -50,7 +77,10 @@ namespace SaveManagerEldenRing
         {
           SaveFile save = new SaveFile() { SaveName = saveName};
           list.Add(save);
-            CopyDirectory(saveLocationPath, folderPath + save.id);          
+            string json = JsonConvert.SerializeObject(list);
+            string _folderpath = folderPath + save.id;
+            CopyDirectory(saveLocationPath, _folderpath);
+            File.WriteAllText(dataPathTxt, json);
         }
 
         private void createSaveButton_Click(object sender, EventArgs e)
@@ -88,6 +118,8 @@ namespace SaveManagerEldenRing
                 {
                     Directory.Delete(folderPath + Convert.ToString(selectedRow.Cells["id"].Value), true);
                     saveList.Rows.RemoveAt(rowIndex);
+                    string json = JsonConvert.SerializeObject(list);
+                    File.WriteAllText(dataPathTxt, json);
                 }
             }
             else
@@ -102,7 +134,6 @@ namespace SaveManagerEldenRing
             {
                 throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
             }
-            DirectoryInfo[] dirs = dir.GetDirectories();
             Directory.CreateDirectory(destinationDir);
             foreach (FileInfo file in dir.GetFiles())
             {
@@ -117,7 +148,7 @@ namespace SaveManagerEldenRing
             {
                 throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
             }
-            DirectoryInfo[] dirs = dir.GetDirectories();
+
             Directory.CreateDirectory(deleteDir);
             foreach (FileInfo file in dir.GetFiles())
             {

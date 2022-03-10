@@ -14,7 +14,6 @@ namespace SaveManagerEldenRing
     {
         SaveManager saveManager;
         FolderBrowserDialog fdlg;
-        BindingList<SaveFile> list;
         public BrowseSaveForm(SaveManager _saveManager)
         {
             InitializeComponent();
