@@ -6,8 +6,8 @@ namespace SaveManagerEldenRing
     {
         public SaveFile()
         {
-            id = new Random().Next(1, 100000);
             Date = DateTime.Now;
+            id = Date.Year * Date.Month * Date.Day * Date.Millisecond;    
         }
         public long id { get; set; }
         public string SaveName { get; set; }

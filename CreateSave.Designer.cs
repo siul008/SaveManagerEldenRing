@@ -41,7 +41,7 @@ namespace SaveManagerEldenRing
             this.saveNameTextBox.Name = "saveNameTextBox";
             this.saveNameTextBox.Size = new System.Drawing.Size(138, 20);
             this.saveNameTextBox.TabIndex = 0;
-            this.saveNameTextBox.Text = "SaveName101";
+            this.saveNameTextBox.Text = "Enter Save Name...";
             this.saveNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.saveNameTextBox_KeyDown);
             // 
             // label1
