@@ -1,0 +1,12 @@
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRing.exe.config
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRing.exe
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRing.pdb
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.csproj.AssemblyReference.cache
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.Properties.Resources.resources
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.csproj.GenerateResource.cache
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.csproj.CoreCompileInputs.cache
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.exe
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.pdb
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.SaveManager.resources
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.BrowseSaveForm.resources
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.CreateSave.resources
