@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="SaveManagerEldenRing.exe.manifest" size="5976">
+    <dependentAssembly dependencyType="install" codebase="SaveManagerEldenRing.exe.manifest" size="5977">
       <assemblyIdentity name="SaveManagerEldenRing.exe" version="1.0.0.8" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Qr9U10a3uQ3IFArBUBo/7eCleJ/vbQcGZmEfaCAZZpA=</dsig:DigestValue>
+        <dsig:DigestValue>HMxnN7Yo/IL9keSnEPlnmwJMvts9OG/JYfq2aJMHZW0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

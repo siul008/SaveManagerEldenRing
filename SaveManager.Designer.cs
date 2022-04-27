@@ -35,6 +35,9 @@ namespace SaveManagerEldenRing
             this.deleteSaveButton = new System.Windows.Forms.Button();
             this.saveList = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.quitoutCheckBox = new System.Windows.Forms.CheckBox();
+            this.quitoutButton = new System.Windows.Forms.Button();
+            this.quitoutSaveLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saveList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +54,7 @@ namespace SaveManagerEldenRing
             // createSaveButton
             // 
             this.createSaveButton.Enabled = false;
-            this.createSaveButton.Location = new System.Drawing.Point(12, 41);
+            this.createSaveButton.Location = new System.Drawing.Point(12, 70);
             this.createSaveButton.Name = "createSaveButton";
             this.createSaveButton.Size = new System.Drawing.Size(173, 23);
             this.createSaveButton.TabIndex = 1;
@@ -61,7 +64,7 @@ namespace SaveManagerEldenRing
             // 
             // deleteSaveButton
             // 
-            this.deleteSaveButton.Location = new System.Drawing.Point(191, 41);
+            this.deleteSaveButton.Location = new System.Drawing.Point(191, 70);
             this.deleteSaveButton.Name = "deleteSaveButton";
             this.deleteSaveButton.Size = new System.Drawing.Size(130, 23);
             this.deleteSaveButton.TabIndex = 3;
@@ -73,7 +76,7 @@ namespace SaveManagerEldenRing
             // 
             this.saveList.AllowUserToAddRows = false;
             this.saveList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.saveList.Location = new System.Drawing.Point(12, 70);
+            this.saveList.Location = new System.Drawing.Point(12, 99);
             this.saveList.Name = "saveList";
             this.saveList.Size = new System.Drawing.Size(309, 182);
             this.saveList.TabIndex = 4;
@@ -81,7 +84,7 @@ namespace SaveManagerEldenRing
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 258);
+            this.button1.Location = new System.Drawing.Point(12, 287);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(309, 23);
             this.button1.TabIndex = 5;
@@ -89,11 +92,45 @@ namespace SaveManagerEldenRing
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.LoadButton_Click);
             // 
+            // quitoutCheckBox
+            // 
+            this.quitoutCheckBox.AutoSize = true;
+            this.quitoutCheckBox.Location = new System.Drawing.Point(134, 16);
+            this.quitoutCheckBox.Name = "quitoutCheckBox";
+            this.quitoutCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.quitoutCheckBox.TabIndex = 6;
+            this.quitoutCheckBox.Text = "Instant Quitout";
+            this.quitoutCheckBox.UseVisualStyleBackColor = true;
+            this.quitoutCheckBox.CheckedChanged += new System.EventHandler(this.quitoutCheckBox_CheckedChanged);
+            // 
+            // quitoutButton
+            // 
+            this.quitoutButton.Enabled = false;
+            this.quitoutButton.Location = new System.Drawing.Point(12, 41);
+            this.quitoutButton.Name = "quitoutButton";
+            this.quitoutButton.Size = new System.Drawing.Size(116, 23);
+            this.quitoutButton.TabIndex = 7;
+            this.quitoutButton.Text = "Quitout Save";
+            this.quitoutButton.UseVisualStyleBackColor = true;
+            this.quitoutButton.Click += new System.EventHandler(this.quitoutButton_Click);
+            // 
+            // quitoutSaveLabel
+            // 
+            this.quitoutSaveLabel.AutoSize = true;
+            this.quitoutSaveLabel.Location = new System.Drawing.Point(134, 46);
+            this.quitoutSaveLabel.Name = "quitoutSaveLabel";
+            this.quitoutSaveLabel.Size = new System.Drawing.Size(137, 13);
+            this.quitoutSaveLabel.TabIndex = 8;
+            this.quitoutSaveLabel.Text = "Currently using : [Sentinelle]";
+            // 
             // SaveManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 293);
+            this.ClientSize = new System.Drawing.Size(338, 317);
+            this.Controls.Add(this.quitoutSaveLabel);
+            this.Controls.Add(this.quitoutButton);
+            this.Controls.Add(this.quitoutCheckBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.saveList);
             this.Controls.Add(this.deleteSaveButton);
@@ -105,6 +142,7 @@ namespace SaveManagerEldenRing
             this.Load += new System.EventHandler(this.SaveManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.saveList)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,6 +153,9 @@ namespace SaveManagerEldenRing
         private System.Windows.Forms.Button deleteSaveButton;
         private System.Windows.Forms.DataGridView saveList;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox quitoutCheckBox;
+        private System.Windows.Forms.Button quitoutButton;
+        private System.Windows.Forms.Label quitoutSaveLabel;
     }
 }
 

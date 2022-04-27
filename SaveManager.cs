@@ -20,6 +20,9 @@ namespace SaveManagerEldenRing
         readonly string dataPath = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\";
         readonly string dataPathTxt = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\json.txt";
         readonly string saveLocationPathTxt = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\saveLocation.txt";
+        SaveFile currentSaveQuitout;
+        public bool saveQuitEnabled;
+
 
         public SaveManager()
         {
@@ -55,6 +58,7 @@ namespace SaveManagerEldenRing
             {
                 list = JsonConvert.DeserializeObject<BindingList<SaveFile>>(File.ReadAllText(dataPathTxt));
             }
+            saveQuitEnabled = false;
             UpdateUi();
             GetSaveList();
         }
@@ -73,9 +77,13 @@ namespace SaveManagerEldenRing
             saveList.Columns[0].Visible = false;
             saveList.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-        public void AddToList(string saveName)
+        public BindingList<SaveFile> GetList()
         {
-          SaveFile save = new SaveFile() { SaveName = saveName};
+            return list;
+        }
+        public void AddToList(string mSaveName)
+        {
+          SaveFile save = new SaveFile(mSaveName, 0);
           list.Add(save);
             string json = JsonConvert.SerializeObject(list);
             string _folderpath = folderPath + save.id;
@@ -112,7 +120,7 @@ namespace SaveManagerEldenRing
             {
                 int rowIndex = saveList.CurrentCell.RowIndex;
                 DataGridViewRow selectedRow = saveList.Rows[rowIndex];
-                string savename = Convert.ToString(selectedRow.Cells["SaveName"].Value);
+                string savename = Convert.ToString(selectedRow.Cells["saveName"].Value);
 
                 if (MessageBox.Show("Are you sure you want to delete [" + savename + "] ?", "Delete Save", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -149,7 +157,7 @@ namespace SaveManagerEldenRing
                 throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
             }
 
-            Directory.CreateDirectory(deleteDir);
+            CopyDirectory(deleteDir, copyToDir);
             foreach (FileInfo file in dir.GetFiles())
             {
                 file.Delete();
@@ -162,11 +170,38 @@ namespace SaveManagerEldenRing
             int rowIndex = saveList.CurrentCell.RowIndex;
             DataGridViewRow selectedRow = saveList.Rows[rowIndex];
             string id = Convert.ToString(selectedRow.Cells["id"].Value);
-            string savename = Convert.ToString(selectedRow.Cells["SaveName"].Value);
+            string savename = Convert.ToString(selectedRow.Cells["saveName"].Value);
             if (MessageBox.Show("Are you sure you want to load [" + savename + "] ? Your current save file will be erased", "Load Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 LoadDirectory(saveLocationPath, folderPath + id);
             }
+        }
+
+        private void quitoutCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (quitoutCheckBox.Checked == true)
+            {
+                quitoutButton.Enabled = true;
+                saveQuitEnabled = true;
+            }
+            else
+            {
+                quitoutButton.Enabled = false;
+                saveQuitEnabled = false;
+                currentSaveQuitout = null;
+                MessageBox.Show(currentSaveQuitout.ToString());
+            }
+        }
+
+        private void quitoutButton_Click(object sender, EventArgs e)
+        {
+            var quitoutSaveForm = new QuitoutSave(this);
+            quitoutSaveForm.ShowDialog();
+        }
+        public void ChangeCurrentQuitoutSave(long id, string name)
+        {
+            currentSaveQuitout = new SaveFile(name, id);
+            quitoutSaveLabel.Text = $"Current Save Loaded : {currentSaveQuitout.saveName}";
         }
     }
 }

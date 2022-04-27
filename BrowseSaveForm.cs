@@ -44,5 +44,10 @@ namespace SaveManagerEldenRing
                 MessageBox.Show("Path is invalid");
             }
         }
+
+        private void savePathEditBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

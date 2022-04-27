@@ -18,3 +18,4 @@ C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Release\SaveManagerEldenR
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Release\SaveManagerEldenRing.csproj.CopyComplete
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Release\SaveManagerEldenRing.exe
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Release\SaveManagerEldenRing.pdb
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Release\SaveManagerEldenRing.QuitoutSave.resources

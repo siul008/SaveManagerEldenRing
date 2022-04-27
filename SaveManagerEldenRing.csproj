@@ -108,6 +108,12 @@
     <Compile Include="CreateSave.Designer.cs">
       <DependentUpon>CreateSave.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuitoutSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuitoutSave.Designer.cs">
+      <DependentUpon>QuitoutSave.cs</DependentUpon>
+    </Compile>
     <Compile Include="SaveFile.cs" />
     <Compile Include="SaveManager.cs">
       <SubType>Form</SubType>
@@ -132,6 +138,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuitoutSave.resx">
+      <DependentUpon>QuitoutSave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SaveManager.resx">
       <DependentUpon>SaveManager.cs</DependentUpon>
     </EmbeddedResource>
