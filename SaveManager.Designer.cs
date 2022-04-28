@@ -38,6 +38,7 @@ namespace SaveManagerEldenRing
             this.quitoutCheckBox = new System.Windows.Forms.CheckBox();
             this.quitoutButton = new System.Windows.Forms.Button();
             this.quitoutSaveLabel = new System.Windows.Forms.Label();
+            this.forceQuitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.saveList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@ namespace SaveManagerEldenRing
             this.saveLocationButton.Name = "saveLocationButton";
             this.saveLocationButton.Size = new System.Drawing.Size(116, 23);
             this.saveLocationButton.TabIndex = 0;
-            this.saveLocationButton.Text = "Save Location";
+            this.saveLocationButton.Text = "Folder Location";
             this.saveLocationButton.UseVisualStyleBackColor = true;
             this.saveLocationButton.Click += new System.EventHandler(this.saveLocationButton_Click);
             // 
@@ -95,11 +96,11 @@ namespace SaveManagerEldenRing
             // quitoutCheckBox
             // 
             this.quitoutCheckBox.AutoSize = true;
-            this.quitoutCheckBox.Location = new System.Drawing.Point(134, 16);
+            this.quitoutCheckBox.Location = new System.Drawing.Point(134, 45);
             this.quitoutCheckBox.Name = "quitoutCheckBox";
-            this.quitoutCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.quitoutCheckBox.Size = new System.Drawing.Size(96, 17);
             this.quitoutCheckBox.TabIndex = 6;
-            this.quitoutCheckBox.Text = "Instant Quitout";
+            this.quitoutCheckBox.Text = "Enable Quitout";
             this.quitoutCheckBox.UseVisualStyleBackColor = true;
             this.quitoutCheckBox.CheckedChanged += new System.EventHandler(this.quitoutCheckBox_CheckedChanged);
             // 
@@ -110,24 +111,37 @@ namespace SaveManagerEldenRing
             this.quitoutButton.Name = "quitoutButton";
             this.quitoutButton.Size = new System.Drawing.Size(116, 23);
             this.quitoutButton.TabIndex = 7;
-            this.quitoutButton.Text = "Quitout Save";
+            this.quitoutButton.Text = "Choose Save";
             this.quitoutButton.UseVisualStyleBackColor = true;
             this.quitoutButton.Click += new System.EventHandler(this.quitoutButton_Click);
             // 
             // quitoutSaveLabel
             // 
             this.quitoutSaveLabel.AutoSize = true;
-            this.quitoutSaveLabel.Location = new System.Drawing.Point(134, 46);
+            this.quitoutSaveLabel.Location = new System.Drawing.Point(134, 17);
             this.quitoutSaveLabel.Name = "quitoutSaveLabel";
             this.quitoutSaveLabel.Size = new System.Drawing.Size(137, 13);
             this.quitoutSaveLabel.TabIndex = 8;
             this.quitoutSaveLabel.Text = "Currently using : [Sentinelle]";
+            this.quitoutSaveLabel.Visible = false;
+            // 
+            // forceQuitButton
+            // 
+            this.forceQuitButton.Enabled = false;
+            this.forceQuitButton.Location = new System.Drawing.Point(246, 41);
+            this.forceQuitButton.Name = "forceQuitButton";
+            this.forceQuitButton.Size = new System.Drawing.Size(75, 23);
+            this.forceQuitButton.TabIndex = 9;
+            this.forceQuitButton.Text = "Force Quit";
+            this.forceQuitButton.UseVisualStyleBackColor = true;
+            this.forceQuitButton.Click += new System.EventHandler(this.forceQuitButton_Click);
             // 
             // SaveManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 317);
+            this.Controls.Add(this.forceQuitButton);
             this.Controls.Add(this.quitoutSaveLabel);
             this.Controls.Add(this.quitoutButton);
             this.Controls.Add(this.quitoutCheckBox);
@@ -156,6 +170,7 @@ namespace SaveManagerEldenRing
         private System.Windows.Forms.CheckBox quitoutCheckBox;
         private System.Windows.Forms.Button quitoutButton;
         private System.Windows.Forms.Label quitoutSaveLabel;
+        private System.Windows.Forms.Button forceQuitButton;
     }
 }
 

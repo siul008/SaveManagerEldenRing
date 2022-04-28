@@ -18,3 +18,4 @@ C:\Users\Siul008\source\repos\SaveManagerEldenRing\bin\Debug\SaveManagerEldenRin
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.TrustInfo.xml
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.exe.manifest
 C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.application
+C:\Users\Siul008\source\repos\SaveManagerEldenRing\obj\Debug\SaveManagerEldenRing.QuitoutSave.resources

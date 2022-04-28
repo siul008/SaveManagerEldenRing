@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace SaveManagerEldenRing
         readonly string saveLocationPathTxt = @"C:\Users\" + Environment.UserName + @"\Documents\EldenRingBackup\ListData\saveLocation.txt";
         SaveFile currentSaveQuitout;
         public bool saveQuitEnabled;
+        WriteMemory writerMemory;
 
 
         public SaveManager()
@@ -83,7 +85,8 @@ namespace SaveManagerEldenRing
         }
         public void AddToList(string mSaveName)
         {
-          SaveFile save = new SaveFile(mSaveName, 0);
+            DateTime Date = DateTime.Now;
+            SaveFile save = new SaveFile(mSaveName,(Date.Year * Date.Month * Date.Day * Date.Millisecond));
           list.Add(save);
             string json = JsonConvert.SerializeObject(list);
             string _folderpath = folderPath + save.id;
@@ -120,7 +123,7 @@ namespace SaveManagerEldenRing
             {
                 int rowIndex = saveList.CurrentCell.RowIndex;
                 DataGridViewRow selectedRow = saveList.Rows[rowIndex];
-                string savename = Convert.ToString(selectedRow.Cells["saveName"].Value);
+                string savename = Convert.ToString(selectedRow.Cells["SaveName"].Value);
 
                 if (MessageBox.Show("Are you sure you want to delete [" + savename + "] ?", "Delete Save", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -157,7 +160,6 @@ namespace SaveManagerEldenRing
                 throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
             }
 
-            CopyDirectory(deleteDir, copyToDir);
             foreach (FileInfo file in dir.GetFiles())
             {
                 file.Delete();
@@ -170,7 +172,7 @@ namespace SaveManagerEldenRing
             int rowIndex = saveList.CurrentCell.RowIndex;
             DataGridViewRow selectedRow = saveList.Rows[rowIndex];
             string id = Convert.ToString(selectedRow.Cells["id"].Value);
-            string savename = Convert.ToString(selectedRow.Cells["saveName"].Value);
+            string savename = Convert.ToString(selectedRow.Cells["SaveName"].Value);
             if (MessageBox.Show("Are you sure you want to load [" + savename + "] ? Your current save file will be erased", "Load Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 LoadDirectory(saveLocationPath, folderPath + id);
@@ -179,20 +181,36 @@ namespace SaveManagerEldenRing
 
         private void quitoutCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            UpdateQuitUI();
+            if(writerMemory == null)
+            {
+                writerMemory = new WriteMemory();
+            }
+        }
+
+        private void UpdateQuitUI()
+        {
             if (quitoutCheckBox.Checked == true)
             {
                 quitoutButton.Enabled = true;
                 saveQuitEnabled = true;
+                if (currentSaveQuitout != null)
+                {
+                    forceQuitButton.Enabled = true;
+                    quitoutSaveLabel.Visible = true;
+                }
             }
             else
             {
-                quitoutButton.Enabled = false;
-                saveQuitEnabled = false;
                 currentSaveQuitout = null;
-                MessageBox.Show(currentSaveQuitout.ToString());
+                quitoutButton.Enabled = false;
+                quitoutSaveLabel.Visible = true;
+                forceQuitButton.Enabled = false;
+                saveQuitEnabled = false;
+                quitoutSaveLabel.Visible = false;
+                quitoutSaveLabel.Text = "No Save Loaded";
             }
         }
-
         private void quitoutButton_Click(object sender, EventArgs e)
         {
             var quitoutSaveForm = new QuitoutSave(this);
@@ -201,7 +219,27 @@ namespace SaveManagerEldenRing
         public void ChangeCurrentQuitoutSave(long id, string name)
         {
             currentSaveQuitout = new SaveFile(name, id);
-            quitoutSaveLabel.Text = $"Current Save Loaded : {currentSaveQuitout.saveName}";
+            quitoutSaveLabel.Text = $"Current Save Loaded : {currentSaveQuitout.SaveName}";
+            UpdateQuitUI();
         }
+
+        private void forceQuitButton_Click(object sender, EventArgs e)
+        {
+            QuitAndLoad();
+        }
+        private void QuitAndLoad()
+        {
+            writerMemory.Quitout();
+            System.Threading.Thread.Sleep(2000); /*  */
+            if (currentSaveQuitout != null)
+            {
+                LoadDirectory(saveLocationPath, folderPath + currentSaveQuitout.id);
+            }
+        }
+        /*            */
+       // private void button2_Click(object sender, EventArgs e)
+        //{
+         //   MessageBox.Show(writerMemory.ReadHp().ToString());
+       // }
     }
 }

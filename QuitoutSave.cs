@@ -27,7 +27,7 @@ namespace SaveManagerEldenRing
         private void quitoutSaveList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow selectedRow = quitoutSaveList.Rows[e.RowIndex];
-            string savename = Convert.ToString(selectedRow.Cells["saveName"].Value);
+            string savename = Convert.ToString(selectedRow.Cells["SaveName"].Value);
             long id = (long)selectedRow.Cells["id"].Value;
             if (MessageBox.Show("Are you sure you want to load [" + savename + "] on death ? Your current save file will be erased", "Load Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
