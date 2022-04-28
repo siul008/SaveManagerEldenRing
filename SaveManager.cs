@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,6 +26,13 @@ namespace SaveManagerEldenRing
         SaveFile currentSaveQuitout;
         public bool saveQuitEnabled;
         WriteMemory writerMemory;
+        bool cancelWorkDead = false;
+        bool cancelWorkMenu = false;
+        bool cancelWorkRestart = false;
+
+        private static BackgroundWorker deadWorker;
+        private static BackgroundWorker menuWorker;
+        private static BackgroundWorker restartWorker;
 
 
         public SaveManager()
@@ -61,8 +70,26 @@ namespace SaveManagerEldenRing
                 list = JsonConvert.DeserializeObject<BindingList<SaveFile>>(File.ReadAllText(dataPathTxt));
             }
             saveQuitEnabled = false;
+
+            /* WORKERS */
+            deadWorker = new BackgroundWorker();
+            deadWorker.WorkerSupportsCancellation = true;
+            deadWorker.DoWork += CheckForDeath;
+            deadWorker.RunWorkerCompleted += DeadWorkerLoopCompleted;
+
+            menuWorker = new BackgroundWorker();
+            menuWorker.WorkerSupportsCancellation = true;
+            menuWorker.DoWork += CheckIfInMenu;
+            menuWorker.RunWorkerCompleted += MenuWorkerLoopCompleted;
+
+            restartWorker = new BackgroundWorker();
+            restartWorker.WorkerSupportsCancellation = true;
+            restartWorker.DoWork += CheckForRestart;
+            restartWorker.RunWorkerCompleted += RestartWorkerLoopCompleted;
+
             UpdateUi();
             GetSaveList();
+
         }
         public void UpdateUi()
         {
@@ -198,6 +225,7 @@ namespace SaveManagerEldenRing
                 {
                     forceQuitButton.Enabled = true;
                     quitoutSaveLabel.Visible = true;
+                    deadWorker.RunWorkerAsync();
                 }
             }
             else
@@ -209,6 +237,7 @@ namespace SaveManagerEldenRing
                 saveQuitEnabled = false;
                 quitoutSaveLabel.Visible = false;
                 quitoutSaveLabel.Text = "No Save Loaded";
+                cancelWorkDead = true;
             }
         }
         private void quitoutButton_Click(object sender, EventArgs e)
@@ -229,17 +258,98 @@ namespace SaveManagerEldenRing
         }
         private void QuitAndLoad()
         {
+            cancelWorkDead = true;
+            Debug.Write("Quitté à " + DateTime.Now);
             writerMemory.Quitout();
-            System.Threading.Thread.Sleep(2000); /*  */
-            if (currentSaveQuitout != null)
+            menuWorker.RunWorkerAsync();
+        }
+       
+        static void DeadWorkerLoopCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
             {
-                LoadDirectory(saveLocationPath, folderPath + currentSaveQuitout.id);
+                deadWorker.RunWorkerAsync();
+            }
+            else
+            {
+                Debug.WriteLine("Dead Cancelled");
             }
         }
-        /*            */
-       // private void button2_Click(object sender, EventArgs e)
-        //{
-         //   MessageBox.Show(writerMemory.ReadHp().ToString());
-       // }
+        static void MenuWorkerLoopCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                menuWorker.RunWorkerAsync();
+            }
+            else
+            {
+                Debug.WriteLine("Menu Cancelled");
+            }
+        }
+        static void RestartWorkerLoopCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                restartWorker.RunWorkerAsync();
+            }
+            else
+            {
+                Debug.WriteLine("Restart Cancelled");
+            }
+        }
+        private void CheckIfInMenu(object sender, DoWorkEventArgs e)
+        {  
+            if(cancelWorkMenu == true)
+            {
+                e.Cancel = true;
+                return;
+            }
+            else
+            {
+                if (writerMemory.CheckIfInMenu() == true)
+                {
+                    Debug.Write("Dans le menu, load de la save " + DateTime.Now);
+                    if (currentSaveQuitout != null)
+                    {
+                        Thread.Sleep(2000);
+                        LoadDirectory(saveLocationPath, folderPath + currentSaveQuitout.id);
+                        cancelWorkRestart = false;
+                        cancelWorkMenu = true;
+                        restartWorker.RunWorkerAsync();
+                    }
+                }
+                else
+                {
+                    Debug.Write("Pas encore dans le menu " + DateTime.Now);
+                }
+            }         
+        }
+        private void CheckForDeath(object sender, DoWorkEventArgs e)
+        {
+            if (cancelWorkDead == true)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (writerMemory.IsDead() == true)
+            {
+                QuitAndLoad();
+            }
+        }
+        private void CheckForRestart(object sender, DoWorkEventArgs e)
+        {
+            if(cancelWorkRestart == true)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if ((writerMemory.CheckIfInMenu() == false) && writerMemory.IsDead() == false)
+            {
+                deadWorker.RunWorkerAsync();
+                cancelWorkDead = false;
+                cancelWorkRestart = true;
+                cancelWorkMenu = false;
+            }
+        }
     }
 }

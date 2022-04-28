@@ -17,6 +17,7 @@ namespace SaveManagerEldenRing
         Process p;
         ulong quitoutPtr, quitoutBaseAddr;
         ulong hpPtr, hpBaseAdress;
+        ulong menuBaseAdress;
         int[] offsetQuitout = { 0x10 };
         int[] offsetHp = { 0x0, 0x190, 0x0, 0x138 };
 
@@ -28,6 +29,7 @@ namespace SaveManagerEldenRing
                 helper = new MemoryHelper64(p);
                 quitoutBaseAddr = helper.GetBaseAddress(0x3C68758);
                 hpBaseAdress = helper.GetBaseAddress(0x3A2ED50);
+                menuBaseAdress = helper.GetBaseAddress(0x3C751B2);
                 quitoutPtr = MemoryUtils.OffsetCalculator(helper, quitoutBaseAddr, offsetQuitout);
                 hpPtr = MemoryUtils.OffsetCalculator(helper, hpBaseAdress, offsetHp);
             }
@@ -36,9 +38,20 @@ namespace SaveManagerEldenRing
         {
             helper.WriteMemory(quitoutPtr, 1);
         }
-        public int ReadHp()
+        public bool IsDead()
         {
-            return helper.ReadMemory<int>(hpPtr);
+                return !(helper.ReadMemory<int>(hpPtr) > 0);     
+        }
+        public bool CheckIfInMenu()
+        {          
+            if(helper.ReadMemory<int>(menuBaseAdress) == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

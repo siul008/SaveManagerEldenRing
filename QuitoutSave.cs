@@ -21,6 +21,7 @@ namespace SaveManagerEldenRing
             mList = saveManagerForm.GetList();
             quitoutSaveList.DataSource = mList;
             quitoutSaveList.Columns[0].Visible = false;
+            quitoutSaveList.ReadOnly = true;
             quitoutSaveList.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 

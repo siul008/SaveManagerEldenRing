@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SaveManagerEldenRing.exe" size="1371120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SaveManagerEldenRing.exe" size="1372656">
       <assemblyIdentity name="SaveManagerEldenRing" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HbtqR8cB66OKS9+VsmBafnDTFlrk5jTuWIRgvgewUxo=</dsig:DigestValue>
+        <dsig:DigestValue>L0uudjTErTpRy5GMjbTAU0dsKNYNx2CHs+sfmU+HhMA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
