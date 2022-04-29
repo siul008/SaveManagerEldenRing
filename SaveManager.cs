@@ -223,6 +223,9 @@ namespace SaveManagerEldenRing
                 saveQuitEnabled = true;
                 if (currentSaveQuitout != null)
                 {
+                    cancelWorkMenu = false;
+                    cancelWorkRestart = false;
+                    cancelWorkDead = false;
                     forceQuitButton.Enabled = true;
                     quitoutSaveLabel.Visible = true;
                     deadWorker.RunWorkerAsync();
@@ -308,7 +311,7 @@ namespace SaveManagerEldenRing
             {
                 if (writerMemory.CheckIfInMenu() == true)
                 {
-                    Debug.Write("Dans le menu, load de la save " + DateTime.Now);
+                    Debug.Write("Dans le menu, load de la save ");
                     if (currentSaveQuitout != null)
                     {
                         Thread.Sleep(2000);
@@ -316,11 +319,8 @@ namespace SaveManagerEldenRing
                         cancelWorkRestart = false;
                         cancelWorkMenu = true;
                         restartWorker.RunWorkerAsync();
+                        Debug.WriteLine("Check For Restart Started");
                     }
-                }
-                else
-                {
-                    Debug.Write("Pas encore dans le menu " + DateTime.Now);
                 }
             }         
         }
@@ -331,8 +331,9 @@ namespace SaveManagerEldenRing
                 e.Cancel = true;
                 return;
             }
-            if (writerMemory.IsDead() == true)
+            if (writerMemory.IsDead() == true && writerMemory.CheckIfInMenu() == false)
             {
+                Debug.WriteLine("Player is Dead, Quitout");
                 QuitAndLoad();
             }
         }
@@ -345,6 +346,7 @@ namespace SaveManagerEldenRing
             }
             if ((writerMemory.CheckIfInMenu() == false) && writerMemory.IsDead() == false)
             {
+                Debug.WriteLine("Back to the loop, Worker Dead Started");
                 deadWorker.RunWorkerAsync();
                 cancelWorkDead = false;
                 cancelWorkRestart = true;

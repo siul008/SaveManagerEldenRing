@@ -31,7 +31,7 @@ namespace SaveManagerEldenRing
                 hpBaseAdress = helper.GetBaseAddress(0x3A2ED50);
                 menuBaseAdress = helper.GetBaseAddress(0x3C751B2);
                 quitoutPtr = MemoryUtils.OffsetCalculator(helper, quitoutBaseAddr, offsetQuitout);
-                hpPtr = MemoryUtils.OffsetCalculator(helper, hpBaseAdress, offsetHp);
+                
             }
         }
         public void Quitout()
@@ -40,10 +40,11 @@ namespace SaveManagerEldenRing
         }
         public bool IsDead()
         {
-                return !(helper.ReadMemory<int>(hpPtr) > 0);     
+            hpPtr = MemoryUtils.OffsetCalculator(helper, hpBaseAdress, offsetHp);
+            return !(helper.ReadMemory<int>(hpPtr) > 0);     
         }
         public bool CheckIfInMenu()
-        {          
+        {
             if(helper.ReadMemory<int>(menuBaseAdress) == 1)
             {
                 return true;
