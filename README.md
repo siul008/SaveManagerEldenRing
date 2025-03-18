@@ -6,7 +6,7 @@
 
  - Create, load, and delete saved games with ease.
  - Organize and track save files in a list with an auto-updating interface.
- - 
+   
  - Quit-Out Save:
 
  - Automatically trigger a special "Quit-Out" save using a memory function, which can load the game progress immediately without requiring you to return to the main menu.
