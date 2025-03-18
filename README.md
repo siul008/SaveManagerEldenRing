@@ -2,25 +2,25 @@
 **Elden Ring Save Manager** is a Windows application designed to help players manage their save files for the popular game Elden Ring. The application allows users to easily back up, load, and delete save files, as well as using memory so saves that be triggered without needing to go through the main menu. This functionality is especially useful for speedrunners or players looking to practice specific game scenarios without the need for lengthy menu navigation.
 
 # Features
-- Save File Management:
+## Save File Management:
 
  - Create, load, and delete saved games with ease.
  - Organize and track save files in a list with an auto-updating interface.
    
- - Quit-Out Save:
+## Quit-Out Save:
 
  - Automatically trigger a special "Quit-Out" save using a memory function, which can load the game progress immediately without requiring you to return to the main menu.
  - Ideal for speedrunners and players who want to practice specific in-game scenarios efficiently.
-   
-- Direct Memory Interaction:
+
+## Direct Memory Interaction:
 
  - The application interacts directly with Elden Ring's memory, enabling seamless save management and manipulation without manual intervention.
    
-- Automatic State Monitoring:
+ ##Automatic State Monitoring:
 
  - Monitors the game state, including detecting when the player dies, enters a menu, or restarts, to handle save loading automatically based on specific events.
    
-- User-Friendly Interface:
+## User-Friendly Interface:
 
  - Simple and intuitive forms for creating, selecting, and deleting saves.
  - Easy-to-use buttons and confirmation dialogs to ensure a smooth user experience.
